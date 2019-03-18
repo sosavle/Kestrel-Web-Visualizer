@@ -1,5 +1,5 @@
 #content {
-    width:600px;
+    max-width:650px;
     margin: auto;
 }
 
@@ -8,7 +8,8 @@ h1 {
 }
 
 #main{
-    width:400px;
+    padding-top: 20px;
+    width:600px;
     height:700px;
 }
 

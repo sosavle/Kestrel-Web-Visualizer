@@ -10,6 +10,7 @@ let samplingDate;
 let state = 0;
 let weatherVariables = ['Wind Speed','Barometric Pressure','Density Altitude','Relative Humidity','Station Pressure','Headwind','Altitude','Dew Point','Magnetic Direction','Wet Bulb Temperature','Wind Chill','Crosswind','Heat Stress Index','Temperature','True Direction'];
 let dataColors = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3','red','blue','green','purple']
+let units = ['m/s','mbar','m','%','mbar','m/s','m','°C','゜','°C','°C','m/s','°C','°C','°'];
 
 let browse = document.getElementById('browseButton');
 browse.addEventListener('change', readSingleFile, false);
@@ -171,13 +172,26 @@ function graph() {
 
             data: time,
         },
-        yAxis: {},
+        yAxis: [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value} ' +  units[state],
+                },
+                name: weatherVariables[state],
+                nameLocation: 'middle',
+                nameGap: 70
+            }
+        ],
         series: [{
             name: weatherVariables[state],
             type: 'line',
             data: kestrelData.getElement(":",state),
             color: dataColors[state],
-        }]
+        }],
+        grid: [{
+           left: '20%',
+        }],
     };
     myChart.setOption(option);
 }console.log(state);
