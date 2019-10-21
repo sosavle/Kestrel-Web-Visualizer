@@ -1,4 +1,6 @@
 #content {
+    position: relative;
+    left: 10%;
     max-width:650px;
     margin: auto;
 }
@@ -11,5 +13,30 @@ h1 {
     padding-top: 20px;
     width:600px;
     height:700px;
+}
+
+@keyframes drop_down{
+    from{background-color: white; height: 10px;}
+    to{background-color: lightblue; height:800px;}
+}
+
+#verticalBar{
+    float: left;
+    position: relative;
+    left: 5%;
+    top: -50px;
+    height: 800px;
+    width: 20%;
+    background-color: lightblue;
+    border-radius: 5% 5% 25% 5%;
+    animation-name: drop_down;
+    animation-duration: 4s;
+}
+
+.menu{
+
+    top: 50px;
+    left: 20%;
+    z-index: 2;
 }
 

@@ -8,9 +8,9 @@ let time = [];
 let kestrelData = [];
 let samplingDate;
 let state = 0;
-let weatherVariables = ['Wind Speed','Barometric Pressure','Density Altitude','Relative Humidity','Station Pressure','Headwind','Altitude','Dew Point','Magnetic Direction','Wet Bulb Temperature','Wind Chill','Crosswind','Heat Stress Index','Temperature','True Direction'];
+let weatherVariables = [];
 let dataColors = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3','red','blue','green','purple']
-let units = ['m/s','mbar','m','%','mbar','m/s','m','°C','゜','°C','°C','m/s','°C','°C','°'];
+let units = [];
 
 let browse = document.getElementById('browseButton');
 browse.addEventListener('change', readSingleFile, false);
@@ -53,6 +53,22 @@ function readSingleFile(e) {
 // Parse the initial lines of fluff
 function spliceContents(contents) {
     let lines = contents.split('\n');
+
+    // Get attribute names
+    let wv = lines[3];
+    wv = wv.replace(/["]+/g, '');
+    weatherVariables = wv.split(',');
+    weatherVariables.shift();
+    console.log("Weather", weatherVariables);
+
+    // Get attribute units
+    let u = lines[4];
+    u = u.replace(/["]+/g, '');
+    units = u.split(',');
+    units.shift();
+    console.log("Units", units);
+
+    // Return data
     lines.splice(0, 5);
     return lines.join('\n');
 }
@@ -121,7 +137,7 @@ function TwoDArray(oneDArray, rows, columns){
     console.log(this.data);
 }
 
-TwoDArray. prototype.getElement = function(row = ":", column = ":"){
+TwoDArray.prototype.getElement = function(row = ":", column = ":"){
     let i=0;
     let j=0;
     let selection = [];
